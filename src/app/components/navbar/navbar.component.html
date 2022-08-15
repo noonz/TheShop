@@ -11,7 +11,7 @@
         </li>
         <ng-template #anonymousUser>
             <li
-                *ngIf='!(auth.user$ | async)'
+                *ngIf='!(appUser)'
                 class="nav-item"
             >
                 <a class="nav-link" routerLink='/login'>Login</a>
@@ -19,7 +19,7 @@
         </ng-template>
         <li
             ngbDropdown
-            *ngIf="auth.user$ | async as user; else anonymousUser"
+            *ngIf="appUser else anonymousUser"
             class="nav-item dropdown"
         >
             <a
@@ -29,15 +29,17 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-            >{{ user.displayName }}</a>
+            >{{ appUser.name }}</a>
             <div
                 ngbDropdownMenu
                 class="dropdown-menu"
                 aria-labelledby="dropdown01"
             >
                 <a class="dropdown-item" routerLink="/orders">Orders</a>
-                <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
-                <a class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+                <ng-container *ngIf='appUser.isAdmin'>
+                    <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
+                    <a class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+                </ng-container>
                 <a class="dropdown-item" (click)="logout()">Log out</a>
             </div>
         </li>
