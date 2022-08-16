@@ -45,4 +45,6 @@ Thumbs.db
 .vscode
 .browserslistrc
 .firebase
+.prettierrc
+.editorconfig
 database.rules.json

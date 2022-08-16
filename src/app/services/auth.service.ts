@@ -10,13 +10,9 @@ import { UserService } from './user.service';
     providedIn: 'root'
 })
 export class AuthService {
-    user$!: Observable<firebase.User|null>;
+    user$!: Observable<firebase.User | null>;
 
-    constructor(
-        private afAuth: AngularFireAuth,
-        private route: ActivatedRoute,
-        private userService: UserService
-    ) {
+    constructor(private afAuth: AngularFireAuth, private route: ActivatedRoute, private userService: UserService) {
         this.user$ = afAuth.authState;
     }
 
@@ -31,14 +27,14 @@ export class AuthService {
         this.afAuth.signOut();
     }
 
-    get appUser$(): Observable<AppUser|null> {
+    get appUser$(): Observable<AppUser | null> {
         return this.user$.pipe(
-                switchMap(user => {
-                    if (user) {
-                        return this.userService.get(user.uid).valueChanges()
-                    }
-                    return of(null);
-                })
-            );
+            switchMap((user) => {
+                if (user) {
+                    return this.userService.get(user.uid).valueChanges();
+                }
+                return of(null);
+            })
+        );
     }
 }
