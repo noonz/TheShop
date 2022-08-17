@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { CustomFormsModule } from 'ng2-validation';
+import { DataTablesModule } from 'angular-datatables';
 //firebase
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
@@ -55,6 +56,7 @@ import { ProductService } from './services/product.service';
         AngularFireAuthModule,
         AngularFireStorageModule,
         NgbModule,
+        DataTablesModule,
         CustomFormsModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent },
@@ -65,13 +67,18 @@ import { ProductService } from './services/product.service';
             { path: 'checkout', component: CheckOutComponent, canActivate: [AuthGuardService] },
             { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
             {
-                path: 'admin/products',
-                component: AdminProductsComponent,
+                path: 'admin/products/new',
+                component: ProductFormComponent,
                 canActivate: [AuthGuardService, AdminAuthGuardService]
             },
             {
-                path: 'admin/products/new',
+                path: 'admin/products/:id',
                 component: ProductFormComponent,
+                canActivate: [AuthGuardService, AdminAuthGuardService]
+            },
+            {
+                path: 'admin/products',
+                component: AdminProductsComponent,
                 canActivate: [AuthGuardService, AdminAuthGuardService]
             },
             {
