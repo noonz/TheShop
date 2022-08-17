@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { map, Observable, Subject, Subscription } from 'rxjs';
 import { Product } from 'src/app/models/products';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -21,6 +21,22 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     constructor(private productService: ProductService) {
         this.subscription = this.productService
             .getAll()
+            // .pipe(
+            //     map((data) => {
+            //         return data.map((p) => ({
+            //             key: p.payload.key!,
+            //             ...(p.payload.val() as Product)
+            //         }));
+            //     })
+            // )
+            .pipe(
+                map((changes) =>
+                  changes.map((c) => {
+                    this.dtTrigger.next(null);
+                    return { key: c.payload.key!, ...c.payload.val() as Product };
+                  })
+                )
+              )
             .subscribe(
                 (products) => (this.filteredProducts = this.products = products)
             );
@@ -29,7 +45,8 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.dtOptions = {
             pagingType: 'full_numbers',
-            pageLength: 2
+            pageLength: 5,
+            retrieve: true
         };
     }
 

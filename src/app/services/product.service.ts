@@ -17,17 +17,8 @@ export class ProductService {
     }
 
     getAll() {
-        return this.db
-            .list('/products')
-            .snapshotChanges()
-            .pipe(
-                map((data) => {
-                    return data.map((p) => ({
-                        key: p.payload.key!,
-                        ...(p.payload.val() as Product)
-                    }));
-                })
-            );
+        return this.db.list('/products').snapshotChanges()
+
     }
 
     getItem(productId: string) {
