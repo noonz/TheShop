@@ -32,6 +32,7 @@ import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { ProductFilterComponent } from './components/product-filter/product-filt
         AdminOrdersComponent,
         LoginComponent,
         ProductFormComponent,
-        ProductFilterComponent
+        ProductFilterComponent,
+        ProductCardComponent
     ],
     imports: [
         BrowserModule,
