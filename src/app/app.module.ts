@@ -33,6 +33,7 @@ import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ShoppingCartService } from './services/shopping-cart.service';
 
 @NgModule({
     declarations: [
@@ -67,9 +68,21 @@ import { ProductCardComponent } from './components/product-card/product-card.com
             { path: 'login', component: LoginComponent },
             { path: 'products', component: ProductsComponent },
             { path: 'shopping-cart', component: ShoppingCartComponent },
-            { path: 'orders', component: MyOrdersComponent, canActivate: [AuthGuardService] },
-            { path: 'checkout', component: CheckOutComponent, canActivate: [AuthGuardService] },
-            { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
+            {
+                path: 'orders',
+                component: MyOrdersComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'checkout',
+                component: CheckOutComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'order-success',
+                component: OrderSuccessComponent,
+                canActivate: [AuthGuardService]
+            },
             {
                 path: 'admin/products/new',
                 component: ProductFormComponent,
@@ -92,7 +105,15 @@ import { ProductCardComponent } from './components/product-card/product-card.com
             }
         ])
     ],
-    providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService, CategoryService, ProductService],
+    providers: [
+        AuthService,
+        AuthGuardService,
+        AdminAuthGuardService,
+        UserService,
+        CategoryService,
+        ProductService,
+        ShoppingCartService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
