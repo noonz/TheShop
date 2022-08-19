@@ -59,7 +59,7 @@ import { ProductService } from './services/product.service';
         DataTablesModule,
         CustomFormsModule,
         RouterModule.forRoot([
-            { path: '', component: HomeComponent },
+            { path: '', component: ProductsComponent }, //ideally, we want a real home page
             { path: 'login', component: LoginComponent },
             { path: 'products', component: ProductsComponent },
             { path: 'shopping-cart', component: ShoppingCartComponent },

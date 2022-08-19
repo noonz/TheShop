@@ -20,7 +20,7 @@ export class ProductFormComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute
     ) {
-        this.categories$ = this.categoryService.getCategories();
+        this.categories$ = this.categoryService.getAll();
         this.loadItem();
     }
 

@@ -10,7 +10,6 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
     products!: Product[];
-    // filteredProducts!: Product[];
     subscription!: Subscription;
 
     dtOptions: DataTables.Settings = {};
@@ -21,15 +20,16 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
             .getAll()
             .pipe(
                 map((changes) =>
-                  changes.map((c) => {
-                    this.dtTrigger.next(null);
-                    return { key: c.payload.key!, ...c.payload.val() as Product };
-                  })
+                    changes.map((c) => {
+                        this.dtTrigger.next(null);
+                        return {
+                            key: c.payload.key!,
+                            ...(c.payload.val() as Product)
+                        };
+                    })
                 )
-              )
-            .subscribe(
-                (products) => (this.products = products)
-            );
+            )
+            .subscribe((products) => (this.products = products));
     }
 
     ngOnInit(): void {
