@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Subscription } from 'rxjs';
 import { Product } from 'src/app/models/products';
-import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,12 +13,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     products: Product[] = [];
     filteredProducts!: Product[];
     subscription!: Subscription;
-    categories$!: any;
     category!: string;
 
     constructor(
         private productService: ProductService,
-        private categoryService: CategoryService,
         private route: ActivatedRoute
     ) {}
 
@@ -50,7 +47,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
                 )
             );
 
-        this.categories$ = this.categoryService.getAll();
     }
 
     ngOnDestroy(): void {
