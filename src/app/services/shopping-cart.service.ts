@@ -22,12 +22,17 @@ export class ShoppingCartService {
             );
     }
 
-    addToCart(product: Product) {
+    public async addToCart(product: Product) {
         this.updateItems(product, 1);
     }
 
-    removeFromCart(product: Product) {
+    public async removeFromCart(product: Product) {
         this.updateItems(product, -1);
+    }
+
+    public async clearCart() {
+        let cartId = await this.getOrCreateCartId();
+        this.db.object(`/shopping-carts/${cartId}/items`).remove();
     }
 
     private create() {
@@ -57,10 +62,17 @@ export class ShoppingCartService {
         item.valueChanges()
             .pipe(take(1))
             .subscribe((cartItem: any) => {
-                item.update({
-                    product: product,
-                    quantity: (cartItem?.quantity || 0) + change
-                });
+                let quantity = (cartItem?.quantity || 0) + change;
+                if (quantity === 0) {
+                    item.remove();
+                } else {
+                    item.update({
+                        title: product.title,
+                        imageUrl: product.imageUrl,
+                        price: product.price,
+                        quantity: quantity
+                    });
+                }
             });
     }
 }
