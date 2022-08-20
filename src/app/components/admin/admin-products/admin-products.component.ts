@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { map, Observable, Subject, Subscription } from 'rxjs';
+import { map, Subject, Subscription } from 'rxjs';
 import { Product } from 'src/app/models/products';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -24,7 +24,12 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
                         this.dtTrigger.next(null);
                         return {
                             key: c.payload.key!,
-                            ...(c.payload.val() as Product)
+                            ...(c.payload.val() as {
+                                title: string;
+                                price: number;
+                                category: string;
+                                imageUrl: string;
+                            })
                         };
                     })
                 )

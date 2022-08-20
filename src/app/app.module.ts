@@ -15,7 +15,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './components/overlay/navbar/navbar.component';
-import { HomeComponent } from './components/pages/home/home.component';
 import { ProductsComponent } from './components/pages/products/products.component';
 import { ShoppingCartComponent } from './components/pages/shopping-cart/shopping-cart.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
@@ -40,7 +39,6 @@ import { ProductQuantityComponent } from './components/overlay/product-quantity/
     declarations: [
         AppComponent,
         NavbarComponent,
-        HomeComponent,
         ProductsComponent,
         ShoppingCartComponent,
         CheckOutComponent,

@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { Product } from 'src/app/models/products';
+import { ShoppingCart } from 'src/app/models/shopping-cart';
 import { ProductService } from 'src/app/services/product.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
@@ -15,12 +16,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
     filteredProducts!: Product[];
     subscription: Subscription[] = [];
     category!: string;
-    cart: any;
+    cart$!: Observable<ShoppingCart>;
+
 
     constructor(
         private productService: ProductService,
         private route: ActivatedRoute,
-        private shoppingCartService: ShoppingCartService
+        private cartService: ShoppingCartService
     ) {}
 
     async ngOnInit() {
@@ -32,7 +34,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
                         changes.map((c) => {
                             return {
                                 key: c.payload.key!,
-                                ...(c.payload.val() as Product)
+                                ...(c.payload.val() as {
+                                    title: string;
+                                    price: number;
+                                    category: string;
+                                    imageUrl: string;
+                                })
                             };
                         })
                     )
@@ -52,16 +59,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
                 )
         );
 
-        this.subscription.push(
-            (await this.shoppingCartService.getCart()).subscribe(cart => {
-                this.cart = cart;
-            })
-        );
+        // this.subscription.push(
+        //     (await this.cartService.getCart()).subscribe((cart) => {
+        //         this.cart = cart;
+        //         console.log('products');
+        //     })
+        // );
+        this.cart$ = await this.cartService.getCart();
     }
 
     ngOnDestroy(): void {
         if (this.subscription) {
-            this.subscription.forEach(sub => {
+            this.subscription.forEach((sub) => {
                 sub.unsubscribe();
             });
         }
