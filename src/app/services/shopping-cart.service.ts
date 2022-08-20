@@ -13,11 +13,11 @@ export class ShoppingCartService {
     public async getCart(): Promise<Observable<ShoppingCart>> {
         let cartId = await this.getOrCreateCartId();
         return this.db
-            .object<ShoppingCart>(`/shopping-carts/${cartId}`)
+            .object(`/shopping-carts/${cartId}`)
             .valueChanges()
             .pipe(
-                map((cart) => {
-                    return new ShoppingCart(cart!.items);
+                map((cart: any) => {
+                    return new ShoppingCart(cart.items);
                 })
             );
     }
@@ -53,7 +53,7 @@ export class ShoppingCartService {
 
     private async updateItems(product: Product, change: number) {
         let cartId = await this.getOrCreateCartId();
-        let item = this.getItem(cartId!, product.key!);
+        let item = this.getItem(cartId!, product.$key);
         item.valueChanges()
             .pipe(take(1))
             .subscribe((cartItem: any) => {
