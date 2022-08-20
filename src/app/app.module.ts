@@ -14,25 +14,25 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
-import { ProductsComponent } from './components/products/products.component';
-import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { NavbarComponent } from './components/overlay/navbar/navbar.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { ProductsComponent } from './components/pages/products/products.component';
+import { ShoppingCartComponent } from './components/pages/shopping-cart/shopping-cart.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
 import { ProductFormComponent } from './components/admin/product-form/product-form.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/overlay/login/login.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { UserService } from './services/user.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
-import { ProductFilterComponent } from './components/product-filter/product-filter.component';
-import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductFilterComponent } from './components/overlay/product-filter/product-filter.component';
+import { ProductCardComponent } from './components/overlay/product-card/product-card.component';
 import { ShoppingCartService } from './services/shopping-cart.service';
 
 @NgModule({
