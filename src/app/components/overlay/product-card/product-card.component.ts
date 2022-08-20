@@ -10,11 +10,24 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 export class ProductCardComponent implements OnInit {
     @Input('product') product!: Product;
     @Input('show-actions') showActions = true;
+    @Input('shopping-cart') shoppingCart: any;
     constructor(private shoppingCartService: ShoppingCartService) {}
 
     ngOnInit(): void {}
 
-    addToCart(product: Product) {
-        this.shoppingCartService.addToCart(product);
+    addToCart() {
+        this.shoppingCartService.addToCart(this.product);
+    }
+
+    removeFromCart() {
+        this.shoppingCartService.removeFromCart(this.product);
+    }
+
+    getQuantity() {
+        if (!this.shoppingCart) {
+            return 0;
+        }
+        let item = this.shoppingCart.items[this.product.key!];
+        return item ? item.quantity : 0;
     }
 }
