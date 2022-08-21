@@ -80,7 +80,7 @@ import { OrderService } from './services/order.service';
                 canActivate: [AuthGuardService]
             },
             {
-                path: 'order-success',
+                path: 'order-success/:id',
                 component: OrderSuccessComponent,
                 canActivate: [AuthGuardService]
             },
