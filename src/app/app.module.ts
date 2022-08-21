@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './components/overlay/navbar/navbar.component';
 import { ProductsComponent } from './components/pages/products/products.component';
 import { ShoppingCartComponent } from './components/pages/shopping-cart/shopping-cart.component';
-import { CheckOutComponent } from './components/check-out/check-out.component';
+import { CheckOutComponent } from './components/pages/check-out/check-out.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
@@ -34,6 +34,7 @@ import { ProductFilterComponent } from './components/overlay/product-filter/prod
 import { ProductCardComponent } from './components/overlay/product-card/product-card.component';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductQuantityComponent } from './components/overlay/product-quantity/product-quantity.component';
+import { OrderService } from './services/order.service';
 
 @NgModule({
     declarations: [
@@ -74,7 +75,7 @@ import { ProductQuantityComponent } from './components/overlay/product-quantity/
                 canActivate: [AuthGuardService]
             },
             {
-                path: 'checkout',
+                path: 'check-out',
                 component: CheckOutComponent,
                 canActivate: [AuthGuardService]
             },
@@ -112,7 +113,8 @@ import { ProductQuantityComponent } from './components/overlay/product-quantity/
         UserService,
         CategoryService,
         ProductService,
-        ShoppingCartService
+        ShoppingCartService,
+        OrderService
     ],
     bootstrap: [AppComponent]
 })
