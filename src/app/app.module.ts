@@ -19,7 +19,7 @@ import { ProductsComponent } from './components/pages/products/products.componen
 import { ShoppingCartComponent } from './components/pages/shopping-cart/shopping-cart.component';
 import { CheckOutComponent } from './components/pages/check-out/check-out.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
-import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { MyOrdersComponent } from './components/pages/my-orders/my-orders.component';
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
 import { ProductFormComponent } from './components/admin/product-form/product-form.component';
